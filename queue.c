@@ -19,6 +19,7 @@ queue LINE;
 void enqueue(char* name);
 char* peek(void);
 void dequeue(void);
+bool isEmpty(void);
 
 int main(void)
 {
@@ -31,19 +32,21 @@ int main(void)
 		printf("Peek: %s, Tail: %s\n", peek(), LINE.tail->name);
 	}
 
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < 4; i++)
 	{
 		dequeue();
 	}
 
 	printf("Peek: %s, Tail: %s\n", peek(), LINE.tail->name);
 
+	printf("isEmpty: %i", isEmpty());	
+
 	return 0;
 }
 
 void enqueue(char* name)
 {
-	if (strcmp(LINE.name, "") == false)
+	if (isEmpty())
 	{
 		strcpy_s(LINE.name, strlen(name) + 1, name);
 	}
@@ -81,6 +84,7 @@ void enqueue(char* name)
 	}
 }
 
+// return next person in queue
 char* peek(void)
 {
 	if (LINE.next != NULL)
@@ -88,6 +92,12 @@ char* peek(void)
 		return LINE.next->name;
 	}
 	return NULL;
+}
+
+// check if LINE queue is empty
+bool isEmpty(void)
+{
+	return (strcmp(LINE.name, "") == false);
 }
 
 void dequeue(void)
