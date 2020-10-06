@@ -12,7 +12,7 @@ typedef struct queue
 
 }queue;
 
-// declare line
+// declare LINE queue
 queue LINE;
 
 // function declartions
