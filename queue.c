@@ -17,29 +17,32 @@ queue LINE;
 
 // function declartions
 void enqueue(char* name);
-char* peek(void);
 void dequeue(void);
 bool isEmpty(void);
+void traverse(void);
 
 int main(void)
 {
 	// test QUEUE
 	char* names[4] = { "Aman", "Tom", "Pratyush", "Dawud" };
 
+	// populate queue - 4 new nodes
 	for (int i = 0; i < 4; i++)
 	{
 		enqueue(names[i]);
-		printf("Peek: %s, Tail: %s\n", peek(), LINE.tail->name);
 	}
+	traverse();
+	printf("\n");
 
-	for (int i = 0; i < 4; i++)
+	// depopulate queue - empty queue, reject dequeue when queue is empty
+	for (int i = 0; i < 7; i++)
 	{
 		dequeue();
 	}
+	traverse();
 
-	printf("Peek: %s, Tail: %s\n", peek(), LINE.tail->name);
-
-	printf("isEmpty: %i", isEmpty());	
+	// check if queue is empty
+	printf("\nisEmpty: %i", isEmpty());	
 
 	return 0;
 }
@@ -84,22 +87,6 @@ void enqueue(char* name)
 	}
 }
 
-// return next person in queue
-char* peek(void)
-{
-	if (LINE.next != NULL)
-	{
-		return LINE.next->name;
-	}
-	return NULL;
-}
-
-// check if LINE queue is empty
-bool isEmpty(void)
-{
-	return (strcmp(LINE.name, "") == false);
-}
-
 void dequeue(void)
 {
 	if (LINE.next == NULL)
@@ -139,6 +126,30 @@ void dequeue(void)
 		if (LINE.next == NULL)
 		{
 			LINE.tail = NULL;
+		}
+	}
+}
+
+// check if LINE queue is empty
+bool isEmpty(void)
+{
+	return (strcmp(LINE.name, "") == false);
+}
+
+// print queue
+void traverse(void)
+{
+	queue* posPtr = &LINE;
+	while (true)
+	{
+		printf("name: %s\n", posPtr->name);
+		if (posPtr->next != NULL)
+		{
+			posPtr = posPtr->next;
+		}
+		else
+		{
+			break;
 		}
 	}
 }
